@@ -2,15 +2,36 @@
 <head><title>   Welcome to Blog </title></head>
 
 <dev>
+
+    <%
+
+        String username =request.getRemoteUser();
+        String userRole="Guest";
+
+        if(request.isUserInRole("admin")) userRole="Administrator";
+        else if(request.isUserInRole("user")) userRole="User";
+
+        if(username!=null){
+            out.println("Logged in as "+username+" ("+ userRole +")");
+        }
+        else{
+            out.println(userRole+" User");
+        }
+
+        if(request.isUserInRole("admin")|| request.isUserInRole("admin")){
+            %>
+
+    <form method=POST action="logout">
+    <input type="submit" name="function" value="Logout">
+
+    </form>
+
+            <%
+        }
+
+
+    %>
     <h1>Welcome to BLOG</h1><br>
-
-    <%--<%--%>
-    <%----%>
-    <%--out.println("logged in as " + session.getAttribute("username").toString());--%>
-
-
-    <%--%>--%>
-
     <br>
 
     <%--<form method=POST action="new_post">--%>

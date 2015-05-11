@@ -17,8 +17,34 @@
 </head>
 
 
-<h2><%
+<%
 
+        String username =request.getRemoteUser();
+        String userRole="Guest";
+
+        if(request.isUserInRole("admin")) userRole="Administrator";
+        else if(request.isUserInRole("user")) userRole="User";
+
+        if(username!=null){
+            out.println("Logged in as "+username+" ("+ userRole +")");
+        }
+        else{
+            out.println(userRole+" User");
+        }
+
+        if(request.isUserInRole("admin")|| request.isUserInRole("admin")){
+    %>
+
+    <form method=POST action="logout">
+        <input type="submit" name="function" value="Logout">
+        <input type="submit"  name="function" value="Home">
+    </form>
+
+    <%
+        }
+%>
+<h2>
+    <%
     String title = request.getAttribute("title").toString();
     String content = request.getAttribute("content").toString();
     out.println( "<br>"+title+"</br>" );
