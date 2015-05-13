@@ -12,6 +12,7 @@ import  java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import javax.servlet.RequestDispatcher;
+import java.util.ArrayList;
 
 
 
@@ -29,6 +30,7 @@ public class addPostServlet extends HttpServlet {
         String postTitle=request.getParameter("title");
         String postContent=request.getParameter("content");
         String path="/home/thilanka/IdeaProjects/blog/web/home.jsp";
+
 
         System.out.println(postTitle);
         System.out.println(postContent);
@@ -58,6 +60,7 @@ public class addPostServlet extends HttpServlet {
 
         obj.put("title",postTitle);
         obj.put("content",postContent);
+        obj.put("comment",new ArrayList<JSONObject>());
 
 
 

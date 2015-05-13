@@ -8,6 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ page import="java.io.File" %>
+<%@ page import="org.json.simple.JSONObject" %>
+<%@ page import="org.json.simple.parser.JSONParser" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.io.FileReader" %>
+<%@ page import="org.json.simple.parser.ParseException" %>
+    <%@ page import="java.io.File" %>
 
 
 <html>
@@ -47,11 +53,44 @@
     <%
     String title = request.getAttribute("title").toString();
     String content = request.getAttribute("content").toString();
-    out.println( "<br>"+title+"</br>" );
-    out.println("<p>"+content+"</p>");
-//    out.println(request.getAttribute("actionType"));
-%>
+        //String allContent = request.getAttribute("allContent").toString();
+        JSONParser parser = new JSONParser();
+        String path= "/home/thilanka/IdeaProjects/blog/posts/"+request.getParameter("id")+".json";
+        Object obj = null;
+        try {
+            obj = parser.parse(new FileReader(path));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        JSONObject jsonObject = (JSONObject) obj;
+
+        ArrayList<JSONObject> comments=null;
+        if(jsonObject.containsKey("comment")){
+            comments = (ArrayList<JSONObject>) jsonObject.get("comment");
+        }
+
+
+
+
+        //System.out.println(comments.get(0).get("comment"));
+        out.println( "<br>"+title+"</br>" );
+        out.println("<p>"+content+"</p>");
+        //out.println(request.getAttribute("actionType"));
+    %>
 </h2>
+<h3>
+    <%
+        if(comments!=null) {
+            for (int i = 0; i < comments.size(); i++) {
+                JSONObject jsObj = comments.get(i);
+                if (jsObj.get("approved").equals("true"))
+                    out.println("<br>" + jsObj.get("comment") + "<br>");
+            }
+        }
+    %>
+</h3>
 <body>
 
 <%
@@ -70,12 +109,15 @@
 
 <h3>Comments:</h3>
 
-<form method="get" action="newComment">
+<form method="get" action="commentPost">
     <textarea name="comment" rows="10" cols="30"></textarea><br>
     <input type="submit" value="OK">
+    <input type="hidden" name="id" value=<%=request.getAttribute("id").toString()%> >
 </form>
 
 <br>
+
+<br><input type="button" onclick="location.href = '/home.jsp' " value="HOME"><br>
 
 </body>
 </html>

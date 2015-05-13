@@ -1,5 +1,5 @@
 <html>
-<head><title>   Welcome to Blog </title></head>
+<head><title>   Welcome  </title></head>
 
 <dev>
 
@@ -31,12 +31,12 @@
 
 
     %>
-    <h1>Welcome to BLOG</h1><br>
-    <br>
+    <h1>BLOGGY</h1><h2>The Blogging Style of new Generation</h2><br>
+
 
     <%--<form method=POST action="new_post">--%>
         <!--<input type="hidden" action="login">-->
-        <input type="button" onclick="location.href = 'new_post?actionType=newPost' " value="New Post">||| <input type="button" onclick="location.href = '/admin?actionType=comments' " value="Admin Area"><br> <br>
+        <input type="button" onclick="location.href = 'new_post?actionType=newPost' " value="Add New Post">|||<input type="button" onclick="location.href = '/admin?actionType=comments' " value="Admin Area"><br> <br>
     <%--</form>--%>
     <!--<a href="new_post">New Post</a>-->
     <%@ page import="java.io.File,
@@ -73,14 +73,15 @@
 //        }
 
         JSONParser parser = new JSONParser();
-        int count =1;
+        int count =new File("/home/thilanka/IdeaProjects/blog/posts").listFiles().length;
+        int recentPost=1;
 
         String path= "/home/thilanka/IdeaProjects/blog/posts/"+count+".json";
         File file = new File(path);
 
 //        out.print("<form method=POST action='viewPost' >");
 
-        while(file.exists()){
+        while(file.exists() && recentPost!=11){
             try {
 
                 Object obj = parser.parse(new FileReader(path));
@@ -106,7 +107,7 @@
                 out.print("<br><br>");
 
 
-                count++;
+                count--;recentPost++;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -125,7 +126,7 @@
 <br><br>
 
 <dev>
-
+    <input type="submit" value="View All posts" onclick="window.location='/homeAll.jsp';" />
 
 </dev>
 
