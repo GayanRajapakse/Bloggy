@@ -36,7 +36,7 @@
 
     <%--<form method=POST action="new_post">--%>
         <!--<input type="hidden" action="login">-->
-        <input type="button" onclick="location.href = 'new_post?actionType=newPost' " value="New Post"><br><br>
+        <input type="button" onclick="location.href = 'new_post?actionType=newPost' " value="New Post">||| <input type="button" onclick="location.href = '/admin?actionType=comments' " value="Admin Area"><br> <br>
     <%--</form>--%>
     <!--<a href="new_post">New Post</a>-->
     <%@ page import="java.io.File,
