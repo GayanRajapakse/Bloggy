@@ -5,14 +5,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
+import java.io.*;
+import java.io.FileReader;
 import  java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import javax.servlet.RequestDispatcher;
 import java.util.ArrayList;
+
+import org.json.simple.parser.JSONParser;
 
 
 
@@ -36,6 +37,8 @@ public class addPostServlet extends HttpServlet {
         System.out.println(postContent);
 
         JSONObject obj = new JSONObject();
+        JSONParser parser = new JSONParser();
+
         String actionType= (String)request.getParameter("actionType");
         
         System.out.println(actionType);
@@ -45,6 +48,18 @@ public class addPostServlet extends HttpServlet {
 
 //            obj.put("title",postTitle);
 //            obj.put("content",postContent);
+
+            try {
+                obj = (JSONObject)parser.parse(new FileReader(path));
+                ArrayList<JSONObject> allComments = (ArrayList<JSONObject>) obj.get("comment");
+
+                obj.put("title",postTitle);
+                obj.put("content",postContent);
+                obj.put("comment",allComments);
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
         else if( actionType.equals("newPost") ) {
 
@@ -54,13 +69,15 @@ public class addPostServlet extends HttpServlet {
             System.out.println("number of posts "+postNumber);
             path="/home/thilanka/IdeaProjects/blog/posts/"+(postNumber+1)+".json";
 
+            obj.put("title",postTitle);
+            obj.put("content",postContent);
+            obj.put("comment",new ArrayList<JSONObject>());
+
 
         }
 
 
-        obj.put("title",postTitle);
-        obj.put("content",postContent);
-        obj.put("comment",new ArrayList<JSONObject>());
+
 
 
 
