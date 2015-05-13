@@ -12,7 +12,7 @@
 <%@ page import="org.json.simple.parser.JSONParser" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.FileReader" %>
-<%@ page import="org.json.simple.parser.ParseException" %>
+<%@ page import="org.json.simple.parser.ParseException,java.io.FileWriter" %>
     <%@ page import="java.io.File" %>
 
 
@@ -46,10 +46,12 @@
         <input type="submit"  name="function" value="Home">
     </form>
 
+
     <%
+            out.println("------------------------------------------------------");
         }
 %>
-<h2>
+
     <%
     String title = request.getAttribute("title").toString();
     String content = request.getAttribute("content").toString();
@@ -67,21 +69,51 @@
         JSONObject jsonObject = (JSONObject) obj;
 
         ArrayList<JSONObject> comments=null;
+        int hits=0;
+
+//        hits=(int)jsonObject.get("hits");
+
         if(jsonObject.containsKey("comment")){
             comments = (ArrayList<JSONObject>) jsonObject.get("comment");
         }
 
+        if(request.getAttribute("views") != null){
+            System.out.println("Views "+request.getAttribute("views").toString());
+            Long views=Long.parseLong(request.getAttribute("views").toString());
+            views++;
 
+            jsonObject.replace("views",views);  // this is new for replace count
+            try {
+
+                FileWriter file = new FileWriter(path);
+
+                file.write(jsonObject.toJSONString());
+
+                file.flush();
+                file.close();
+
+
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+//        int =jsonObject.get("hits");
 
 
         //System.out.println(comments.get(0).get("comment"));
-        out.println( "<br>"+title+"</br>" );
+        out.println( "<br><h2><u>"+title+"</u></h2></br>" );
+
+
         out.println("<p>"+content+"</p>");
         //out.println(request.getAttribute("actionType"));
+        String postId="editPost?id="+request.getAttribute("id").toString()+"&actionType=edit";
     %>
-</h2>
-<h3>
+
+<input type="button" onclick="location.href = '<%=postId%>' " value="Edit This">
+
     <%
+        out.println("<h4>Comments:<h4>");
         if(comments!=null) {
             for (int i = 0; i < comments.size(); i++) {
                 JSONObject jsObj = comments.get(i);
@@ -90,7 +122,7 @@
             }
         }
     %>
-</h3>
+
 <body>
 
 <%
@@ -103,11 +135,11 @@
 
 <%
 
-    String postId="editPost?id="+request.getAttribute("id").toString()+"&actionType=edit";
-%>
-<input type="button" onclick="location.href = '<%=postId%>' " value="Edit This">
 
-<h3>Comments:</h3>
+%>
+
+
+<h4>Add your Comment:</h4>
 
 <form method="get" action="commentPost">
     <textarea name="comment" rows="10" cols="30"></textarea><br>
@@ -117,7 +149,7 @@
 
 <br>
 
-<br><input type="button" onclick="location.href = '/home.jsp' " value="HOME"><br>
+<br><input type="button" onclick="location.href = '/home.jsp' " value="Back to HOME"><br>
 
 </body>
 </html>

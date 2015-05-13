@@ -33,6 +33,7 @@ public class viewPostServlet extends HttpServlet {
         String path= "/home/thilanka/IdeaProjects/blog/posts/"+postId+".json";
         File file = new File(path);
         String title=null,content=null;
+        long viewCount=0;
         String actionType= (String)request.getParameter("actionType");
 
         if (file.exists()){
@@ -44,6 +45,7 @@ public class viewPostServlet extends HttpServlet {
 
                 title = (String) jsonObject.get("title");
                 content = (String) jsonObject.get("content");
+                viewCount = (Long) jsonObject.get("views");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -56,6 +58,7 @@ public class viewPostServlet extends HttpServlet {
         request.setAttribute("title",title);
         request.setAttribute("content",content);
         request.setAttribute("id",postId);
+        request.setAttribute("views",viewCount);
         request.setAttribute("actionType", actionType);
         RequestDispatcher rd;
         if(actionType.equals("view")){

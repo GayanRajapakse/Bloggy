@@ -90,12 +90,14 @@
 
                 String title = (String) jsonObject.get("title");
                 String content = (String) jsonObject.get("content");
+                long viewCount = (Long) jsonObject.get("views");
                 //JSONArray companyList = (JSONArray) jsonObject.get("Company List");
 
                 //System.out.println(title);
 
 
                 out.println(count+" . :"+title);
+                out.print("---->"+viewCount);
                 out.print("<br>");
 //                out.println(content);
 //                out.print("<br>");
@@ -127,6 +129,9 @@
 
 <dev>
     <input type="submit" value="View All posts" onclick="window.location='/homeAll.jsp';" />
+    <input type="submit" value="Site Stats" onclick="window.location='/statics.jsp';" />
+
+
 
 </dev>
 

@@ -126,7 +126,7 @@
 
 <dev>
 
-
+  <input type="submit" value="Site Stats" onclick="window.location='/statics.jsp';" />
 </dev>
 
 

@@ -52,10 +52,14 @@ public class addPostServlet extends HttpServlet {
             try {
                 obj = (JSONObject)parser.parse(new FileReader(path));
                 ArrayList<JSONObject> allComments = (ArrayList<JSONObject>) obj.get("comment");
+//                int hits= obj.get("hits");
+
+                long viewCount = (Long) obj.get("views");
 
                 obj.put("title",postTitle);
                 obj.put("content",postContent);
                 obj.put("comment",allComments);
+                obj.put("views",viewCount);
 
             }catch(Exception e){
                 e.printStackTrace();
@@ -69,9 +73,11 @@ public class addPostServlet extends HttpServlet {
             System.out.println("number of posts "+postNumber);
             path="/home/thilanka/IdeaProjects/blog/posts/"+(postNumber+1)+".json";
 
+
             obj.put("title",postTitle);
             obj.put("content",postContent);
             obj.put("comment",new ArrayList<JSONObject>());
+            obj.put("views",0);
 
 
         }
