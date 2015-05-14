@@ -20,7 +20,7 @@
   <form method=GET action="approveComment">
     <%
 
-      String path= "/home/thilanka/IdeaProjects/blog/posts/";
+      String path= request.getServletContext().getRealPath("/")+"posts/";
 
       File folder = new File(path);
       File[] listOfFiles = folder.listFiles();
@@ -76,5 +76,5 @@
     <br>
 
   </form>
-  <br><input type="button" onclick="location.href = '/home.jsp' " value="HOME"><br>
+  <br><input type="button" onclick="location.href = 'home.jsp' " value="HOME"><br>
 </html>

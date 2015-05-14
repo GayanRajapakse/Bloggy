@@ -27,10 +27,10 @@
 <%
 
   JSONParser parser = new JSONParser();
-  int count =new File("/home/thilanka/IdeaProjects/blog/posts").listFiles().length;
+  int count =new File(request.getServletContext().getRealPath("/")+"posts/").listFiles().length;
   int recentPost=1;
 
-  String path= "/home/thilanka/IdeaProjects/blog/posts/"+count+".json";
+  String path= request.getServletContext().getRealPath("/")+"posts/"+count+".json";
   File file = new File(path);
 
   out.print("Title ------------->Total Hits on page<br><br>");
@@ -62,14 +62,14 @@
       e.printStackTrace();
     }
 
-    path= "/home/thilanka/IdeaProjects/blog/posts/"+count+".json";
+    path= request.getServletContext().getRealPath("/")+"posts/"+count+".json";
     file = new File(path);
   }
 
 
 %>
 <br><br>
-<input type="submit" value="Back to Home" onclick="window.location='/home.jsp';" />
+<input type="submit" value="Back to Home" onclick="window.location='home.jsp';" />
 
 </body>
 </html>

@@ -24,7 +24,7 @@ public class editPostServlet extends HttpServlet {
 
         JSONParser parser = new JSONParser();
 
-        String path= "/home/thilanka/IdeaProjects/blog/posts/"+postId+".json";
+        String path= request.getServletContext().getRealPath("/")+"posts/"+postId+".json";
         File file = new File(path);
         String title=null,content=null;
 

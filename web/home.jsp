@@ -18,7 +18,7 @@
             out.println(userRole+" User");
         }
 
-        if(request.isUserInRole("admin")|| request.isUserInRole("admin")){
+        if(request.isUserInRole("admin")|| request.isUserInRole("admin")|| request.isUserInRole("admin")|| request.isUserInRole("user")){
             %>
 
     <form method=POST action="logout">
@@ -36,7 +36,7 @@
 
     <%--<form method=POST action="new_post">--%>
         <!--<input type="hidden" action="login">-->
-        <input type="button" onclick="location.href = 'new_post?actionType=newPost' " value="Add New Post">|||<input type="button" onclick="location.href = '/admin?actionType=comments' " value="Admin Area"><br> <br>
+        <input type="button" onclick="location.href = 'new_post?actionType=newPost' " value="Add New Post">|||<input type="button" onclick="location.href = 'admin?actionType=comments' " value="Admin Area"><br> <br>
     <%--</form>--%>
     <!--<a href="new_post">New Post</a>-->
     <%@ page import="java.io.File,
@@ -73,10 +73,12 @@
 //        }
 
         JSONParser parser = new JSONParser();
-        int count =new File("/home/thilanka/IdeaProjects/blog/posts").listFiles().length;
+        int count =new File(request.getServletContext().getRealPath("/")+"posts/").listFiles().length;
+        //int count =new File("F:\\web design\\blog\\out\\artifacts\\blog_war_exploded\\posts").listFiles().length;
         int recentPost=1;
 
-        String path= "/home/thilanka/IdeaProjects/blog/posts/"+count+".json";
+        String path= request.getServletContext().getRealPath("/")+"posts/"+count+".json";
+        System.out.println(path);
         File file = new File(path);
 
 //        out.print("<form method=POST action='viewPost' >");
@@ -115,7 +117,7 @@
                 e.printStackTrace();
             }
 
-            path= "/home/thilanka/IdeaProjects/blog/posts/"+count+".json";
+            path= request.getServletContext().getRealPath("/")+"posts/"+count+".json";
             file = new File(path);
         }
 
@@ -128,8 +130,9 @@
 <br><br>
 
 <dev>
-    <input type="submit" value="View All posts" onclick="window.location='/homeAll.jsp';" />
-    <input type="submit" value="Site Stats" onclick="window.location='/statics.jsp';" />
+    
+    <input type="submit" value="View All posts" onclick="window.location='homeAll.jsp';" />
+    <input type="submit" value="Site Stats" onclick="window.location='statics.jsp';" />
 
 
 

@@ -25,7 +25,7 @@
       out.println(userRole+" User");
     }
 
-    if(request.isUserInRole("admin")|| request.isUserInRole("admin")){
+    if(request.isUserInRole("admin")|| request.isUserInRole("admin") || request.isUserInRole("admin")|| request.isUserInRole("user")){
   %>
 
   <form method=POST action="logout">

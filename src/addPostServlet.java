@@ -26,33 +26,25 @@ public class addPostServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //System.out.println("newpost success in doPOst");
-
         String postTitle=request.getParameter("title");
         String postContent=request.getParameter("content");
-        String path="/home/thilanka/IdeaProjects/blog/web/home.jsp";
+        //String path="/home/thilanka/IdeaProjects/blog/web/home.jsp";
+        String path = request.getServletContext().getRealPath("/")+"home.jsp";
 
-
-//        System.out.println(postTitle);
-//        System.out.println(postContent);
+//String path = request.getServletContext().getRealPath("/")+"posts\\"+count+".json";
 
         JSONObject obj = new JSONObject();
         JSONParser parser = new JSONParser();
 
         String actionType= (String)request.getParameter("actionType");
-        
-//        System.out.println(actionType);
+
 
         if( actionType.equals("update")){
-            path="/home/thilanka/IdeaProjects/blog/posts/"+(request.getParameter("id").toString())+".json";
-
-//            obj.put("title",postTitle);
-//            obj.put("content",postContent);
+            path=request.getServletContext().getRealPath("/")+"posts/"+(request.getParameter("id").toString())+".json";
 
             try {
                 obj = (JSONObject)parser.parse(new FileReader(path));
                 ArrayList<JSONObject> allComments = (ArrayList<JSONObject>) obj.get("comment");
-//                int hits= obj.get("hits");
 
                 long viewCount = (Long) obj.get("views");
 
@@ -67,11 +59,10 @@ public class addPostServlet extends HttpServlet {
         }
         else if( actionType.equals("newPost") ) {
 
-            System.out.println("newpost success");
 
-            int postNumber = new File("/home/thilanka/IdeaProjects/blog/posts").listFiles().length;
-//            System.out.println("number of posts "+postNumber);
-            path="/home/thilanka/IdeaProjects/blog/posts/"+(postNumber+1)+".json";
+            int postNumber = new File(request.getServletContext().getRealPath("/")+"posts/").listFiles().length;
+
+            path=request.getServletContext().getRealPath("/")+"posts/"+(postNumber+1)+".json";
 
 
             obj.put("title",postTitle);
@@ -82,26 +73,12 @@ public class addPostServlet extends HttpServlet {
 
         }
 
-
-
-
-
-
         try {
 
             FileWriter file = new FileWriter(path);
-            //FileWriter titleFile=new FileWriter(titlePath,true);
-
             file.write(obj.toJSONString());
-            ///titleFile.write(obj2.toJSONString());
-
             file.flush();
             file.close();
-
-//            titleFile.flush();
-//            titleFile.close();
-
-
 
         } catch (IOException e) {
             e.printStackTrace();

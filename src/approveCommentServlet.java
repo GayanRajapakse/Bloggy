@@ -25,7 +25,7 @@ public class approveCommentServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path= "/home/thilanka/IdeaProjects/blog/posts/";
+        String path= request.getServletContext().getRealPath("/")+"posts/";
 
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();

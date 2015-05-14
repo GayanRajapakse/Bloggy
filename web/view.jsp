@@ -38,7 +38,7 @@
             out.println(userRole+" User");
         }
 
-        if(request.isUserInRole("admin")|| request.isUserInRole("admin")){
+        if(request.isUserInRole("admin")|| request.isUserInRole("admin") || request.isUserInRole("admin")|| request.isUserInRole("user")){
     %>
 
     <form method=POST action="logout">
@@ -57,7 +57,7 @@
     String content = request.getAttribute("content").toString();
         //String allContent = request.getAttribute("allContent").toString();
         JSONParser parser = new JSONParser();
-        String path= "/home/thilanka/IdeaProjects/blog/posts/"+request.getParameter("id")+".json";
+        String path= request.getServletContext().getRealPath("/")+"posts/"+request.getParameter("id")+".json";
         Object obj = null;
         try {
             obj = parser.parse(new FileReader(path));
@@ -146,7 +146,7 @@
 
 <br>
 
-<br><input type="button" onclick="location.href = '/home.jsp' " value="Back to HOME">
+<br><input type="button" onclick="location.href = 'home.jsp' " value="Back to HOME">
 <br>
 
 </body>
