@@ -98,10 +98,7 @@
             }
         }
 
-//        int =jsonObject.get("hits");
 
-
-        //System.out.println(comments.get(0).get("comment"));
         out.println( "<br><h2><u>"+title+"</u></h2></br>" );
 
 
@@ -149,7 +146,8 @@
 
 <br>
 
-<br><input type="button" onclick="location.href = '/home.jsp' " value="Back to HOME"><br>
+<br><input type="button" onclick="location.href = '/home.jsp' " value="Back to HOME">
+<br>
 
 </body>
 </html>

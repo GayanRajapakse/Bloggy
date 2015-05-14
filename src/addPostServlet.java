@@ -26,22 +26,22 @@ public class addPostServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("newpost success in doPOst");
+        //System.out.println("newpost success in doPOst");
 
         String postTitle=request.getParameter("title");
         String postContent=request.getParameter("content");
         String path="/home/thilanka/IdeaProjects/blog/web/home.jsp";
 
 
-        System.out.println(postTitle);
-        System.out.println(postContent);
+//        System.out.println(postTitle);
+//        System.out.println(postContent);
 
         JSONObject obj = new JSONObject();
         JSONParser parser = new JSONParser();
 
         String actionType= (String)request.getParameter("actionType");
         
-        System.out.println(actionType);
+//        System.out.println(actionType);
 
         if( actionType.equals("update")){
             path="/home/thilanka/IdeaProjects/blog/posts/"+(request.getParameter("id").toString())+".json";
@@ -70,7 +70,7 @@ public class addPostServlet extends HttpServlet {
             System.out.println("newpost success");
 
             int postNumber = new File("/home/thilanka/IdeaProjects/blog/posts").listFiles().length;
-            System.out.println("number of posts "+postNumber);
+//            System.out.println("number of posts "+postNumber);
             path="/home/thilanka/IdeaProjects/blog/posts/"+(postNumber+1)+".json";
 
 

@@ -51,8 +51,7 @@
   String postId="updatePost?id="+request.getParameter("id").toString()+"&actionType=update";
 %>
 <body>
-<%--<input type="text" name="title" value=" <%=postTitle%>>" />--%>
-<%--<input type="text" name="content" value=" <%=postContent%>>" />--%>
+
 
 <form method="POST" action="updatePost">
 

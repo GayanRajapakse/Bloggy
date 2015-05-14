@@ -7,10 +7,7 @@ import java.io.IOException;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.FileWriter;
-import  java.io.IOException;
-import org.json.simple.JSONArray;
+
 import org.json.simple.JSONObject;
 import  org.json.simple.parser.JSONParser;
 import javax.servlet.RequestDispatcher;
@@ -60,6 +57,7 @@ public class viewPostServlet extends HttpServlet {
         request.setAttribute("id",postId);
         request.setAttribute("views",viewCount);
         request.setAttribute("actionType", actionType);
+
         RequestDispatcher rd;
         if(actionType.equals("view")){
             rd=getServletContext().getRequestDispatcher("/view.jsp");

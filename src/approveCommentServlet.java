@@ -37,7 +37,7 @@ public class approveCommentServlet extends HttpServlet {
 
             String param = paramList.nextElement();
             String isApproved = request.getParameter(param);
-            System.out.println("param is : " + param);
+//            System.out.println("param is : " + param);
             //System.out.println("param value is : "+isApproved);
 
             //if(isApproved.equals("false")) continue;

@@ -51,26 +51,7 @@
     java.io.BufferedReader,java.util.ArrayList" %>
 
   <%
-    //        BufferedReader in
-//                = new BufferedReader(new FileReader("/home/thilanka/IdeaProjects/blog/posts/posts.json"));
-//
-//        ArrayList<JSONObject> contentsAsJsonObjects = new ArrayList<JSONObject>();
-//        while(true)
-//        {
-//            String str = in.readLine();
-//            if(str==null)break;
-//            contentsAsJsonObjects.add(new JSONObject( str ));
-//        }
-//
-//        for(int i=0; i<contentsAsJsonObjects.size(); i++)
-//        {
-//            JSONObject json = contentsAsJsonObjects.get(i);
-//            String title = (String)json.get("title");
-//            String content = (String)json.get("content");
-//           out.println(title);
-//            out.println(content);
-//            out.println();
-//        }
+
 
     JSONParser parser = new JSONParser();
     int count =new File("/home/thilanka/IdeaProjects/blog/posts").listFiles().length;;
