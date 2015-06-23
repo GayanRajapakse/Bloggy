@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+     http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--<security-constraint>-->
+        <!--<web-resource-collection>-->
+            <!--<web-resource-name>admin</web-resource-name>-->
+            <!--<url-pattern>/admin/*</url-pattern>-->
+        <!--</web-resource-collection>-->
+        <!--<auth-constraint>-->
+            <!--<role-name>admin</role-name>-->
+        <!--</auth-constraint>-->
+    <!--</security-constraint>-->
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>user</web-resource-name>
+            <url-pattern>/new_post</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>user</web-resource-name>
+            <url-pattern>/editPost</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin Area</web-resource-name>
+            <url-pattern>/admin</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>Login first to add a New post</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/loginFailled.html</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+    <servlet>
+        <servlet-name>newpost</servlet-name>
+        <servlet-class>newPostServlet </servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>logoutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>addPost</servlet-name>
+        <servlet-class>addPostServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>viewPost</servlet-name>
+        <servlet-class>viewPostServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>editPost</servlet-name>
+        <servlet-class>viewPostServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updatePost</servlet-name>
+        <servlet-class>addPostServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>adminArea</servlet-name>
+        <servlet-class>adminServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>approve</servlet-name>
+        <servlet-class>approveCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>commentPost</servlet-name>
+        <servlet-class>commentServlet</servlet-class>
+    </servlet>
+
+
+
+
+
+    <servlet-mapping>
+        <servlet-name>newpost</servlet-name>
+        <url-pattern>/new_post</url-pattern>
+            </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+            </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>addPost</servlet-name>
+        <url-pattern>/addPost</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>viewPost</servlet-name>
+        <url-pattern>/viewPost</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>editPost</servlet-name>
+        <url-pattern>/editPost</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updatePost</servlet-name>
+        <url-pattern>/updatePost</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>adminArea</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>approve</servlet-name>
+        <url-pattern>/approveComment</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>commentPost</servlet-name>
+        <url-pattern>/commentPost</url-pattern>
+    </servlet-mapping>
+
+    <!--<servlet>-->
+        <!--<display-name>AddTimeRecordServlet</display-name>-->
+        <!--<servlet-name>AddTimeRecordServlet</servlet-name>-->
+        <!--<servlet-class>org.apache.geronimo.samples.timereport.web.AddTimeRecordServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet>-->
+        <!--<display-name>AddEmployeeServlet</display-name>-->
+        <!--<servlet-name>AddEmployeeServlet</servlet-name>-->
+        <!--<servlet-class>org.apache.geronimo.samples.timereport.web.AddEmployeeServlet</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddTimeRecordServlet</servlet-name>-->
+        <!--<url-pattern>/employee/add_timerecord</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddEmployeeServlet</servlet-name>-->
+        <!--<url-pattern>/manager/add_employee</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+</web-app>
